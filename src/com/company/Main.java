@@ -51,9 +51,11 @@ public class Main {
                     }
                     actPlayer = !actPlayer;
                     if (isOver(spielfeld,winningStoneCount)){
-                        System.out.print("Spieler ");
+                        System.out.print("\nSpieler ");
                         if (actPlayer){ System.out.print(2);} else {System.out.print(1);}
-                        System.out.print(" gewinnt!");
+                        System.out.println(" gewinnt mit folgendem Brett:");
+                        printSpielfeld(spielfeld);
+                        System.exit(0);
                     }
                     correctvalues = true;
                 }
@@ -107,6 +109,7 @@ public class Main {
 
     private static boolean isOver(char[][] spielfeld, int winningStoneCount) {
 
+        //Schräg von Links nach rechts
         for (int colum = winningStoneCount; colum <= spielfeld[0].length; colum++) {
 
             for (int currentrow = 0; currentrow <= spielfeld.length; currentrow++) {
@@ -114,7 +117,10 @@ public class Main {
                 int blockcountX = 0;
                 int blockcountO = 0;
 
-                for (int aktcolum = colum, aktrow = currentrow; aktcolum <= spielfeld.length; aktcolum++, aktrow++) {
+                for (int aktcolum = colum, aktrow = currentrow; aktcolum <= spielfeld[0].length -1 && aktrow <= spielfeld.length -1; aktcolum++, aktrow++) {
+//                    if (aktcolum == 8 || aktrow == 8){
+//                        int testz = 0;
+//                    }
                     if (spielfeld[aktcolum][aktrow] == 'X') {
                         blockcountX++;
                     } else {
@@ -131,6 +137,94 @@ public class Main {
                         return true;
                     }
                 }
+            }
+        }
+
+        //Schräg von rechts nach links
+        for (int colum = winningStoneCount; colum <= spielfeld[0].length -1; colum++) {
+
+            for (int currentrow = spielfeld[0].length -1; currentrow>= 0; currentrow--) {
+
+                int blockcountX = 0;
+                int blockcountO = 0;
+
+                for (int aktcolum = colum, aktrow = currentrow; aktcolum >= 0 && aktrow >= 0; aktcolum--, aktrow--) {
+//                    if (aktcolum == 8 || aktrow == 8){
+//                        int testz = 0;
+//                    }
+                    if (spielfeld[aktcolum][aktrow] == 'X') {
+                        blockcountX++;
+                    } else {
+                        blockcountX = 0;
+                    }
+
+                    if (spielfeld[aktcolum][aktrow] == 'O') {
+                        blockcountO++;
+                    } else {
+                        blockcountO = 0;
+                    }
+
+                    if (blockcountO == 4 || blockcountX == 4) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        //Vertikal
+        for (int colum = 0; colum <= spielfeld[0].length -1; colum++) {
+
+            int blockcountX = 0;
+            int blockcountO = 0;
+
+            for (int aktrow = 0; aktrow <= spielfeld[0].length -1; aktrow++) {
+
+                if (spielfeld[aktrow][colum] == 'X') {
+                    blockcountX++;
+                } else {
+                    blockcountX = 0;
+                }
+
+                if (spielfeld[aktrow][colum] == 'O') {
+                    blockcountO++;
+                } else {
+                    blockcountO = 0;
+                }
+
+                if (blockcountO == 4 || blockcountX == 4) {
+                    return true;
+                }
+
+            }
+        }
+
+        //Horizontal
+
+        for (int aktrow = 0; aktrow <= spielfeld[0].length -1; aktrow++) {
+
+
+            for (int colum = 0; colum <= spielfeld[0].length -1; colum++) {
+
+
+                int blockcountX = 0;
+                int blockcountO = 0;
+
+                if (spielfeld[colum][aktrow] == 'X') {
+                    blockcountX++;
+                } else {
+                    blockcountX = 0;
+                }
+
+                if (spielfeld[colum][aktrow] == 'O') {
+                    blockcountO++;
+                } else {
+                    blockcountO = 0;
+                }
+
+                if (blockcountO == 4 || blockcountX == 4) {
+                    return true;
+                }
+
             }
         }
 
