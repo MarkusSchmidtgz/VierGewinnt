@@ -48,7 +48,7 @@ public class Main {
                         }
 
                     }
-
+                    actPlayer = !actPlayer;
                     correctvalues = true;
                 }
 
@@ -83,8 +83,8 @@ public class Main {
 
     private static boolean setStone(int x, char[][] spielfeld, boolean player){
 
-        for (int y = spielfeld.length -1; y != 0; y--){
-            if (spielfeld[y][x] == 0){
+        for (int y = spielfeld.length -1; y != -11; y--){
+            if (spielfeld[y][x -1] == 0){
                 if (player){
                     spielfeld[y][x-1] = 'X';
                 } else {
