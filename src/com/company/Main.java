@@ -13,6 +13,7 @@ public class Main {
         char[][] spielfeld = new char[8][8];
         int currentX = 0;
         boolean actPlayer = false;
+        int winningStoneCount = 4;
 
         System.out.println("Herzlich willkomen zu Vier gewinnt \nSpieler ein besitzt den Stein X und Spieler 2 den Stein O (wie Otto)");
         System.out.println("Die Spalten und Reihen angabe wird wie folgt angegeben Spalte:Reihe zum Beispiel 1:1 für den ersten Stein oben links \n");
@@ -49,6 +50,11 @@ public class Main {
 
                     }
                     actPlayer = !actPlayer;
+                    if (isOver(spielfeld,winningStoneCount)){
+                        System.out.print("Spieler ");
+                        if (actPlayer){ System.out.print(2);} else {System.out.print(1);}
+                        System.out.print(" gewinnt!");
+                    }
                     correctvalues = true;
                 }
 
@@ -81,21 +87,53 @@ public class Main {
         System.out.println("12345678");
     }
 
-    private static boolean setStone(int x, char[][] spielfeld, boolean player){
+    private static boolean setStone(int row, char[][] spielfeld, boolean player){
 
-        for (int y = spielfeld.length -1; y != -11; y--){
-            if (spielfeld[y][x -1] == 0){
+        for (int colum = spielfeld.length -1; colum >= 0; colum--){
+            if (spielfeld[colum][row -1] == 0){
                 if (player){
-                    spielfeld[y][x-1] = 'X';
+                    spielfeld[colum][row-1] = 'X';
                 } else {
-                    spielfeld[y][x-1] = 'O';
+                    spielfeld[colum][row-1] = 'O';
                 }
                 break;
-            } else if (x == 1){
+            } else if (colum == 0){
+                System.out.println("Hier kann der Stein nicht eingelegt werder!");
                 return false;
             }
         }
         return true;
+    }
 
+    private static boolean isOver(char[][] spielfeld, int winningStoneCount) {
+
+        for (int colum = winningStoneCount; colum <= spielfeld[0].length; colum++) {
+
+            for (int currentrow = 0; currentrow <= spielfeld.length; currentrow++) {
+
+                int blockcountX = 0;
+                int blockcountO = 0;
+
+                for (int aktcolum = colum, aktrow = currentrow; aktcolum <= spielfeld.length; aktcolum++, aktrow++) {
+                    if (spielfeld[aktcolum][aktrow] == 'X') {
+                        blockcountX++;
+                    } else {
+                        blockcountX = 0;
+                    }
+
+                    if (spielfeld[aktcolum][aktrow] == 'O') {
+                        blockcountO++;
+                    } else {
+                        blockcountO = 0;
+                    }
+
+                    if (blockcountO == 4 || blockcountX == 4) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
     }
 }
