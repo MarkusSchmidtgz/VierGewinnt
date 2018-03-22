@@ -11,13 +11,9 @@ public class Main {
 
         //Variablen Initalisieren
         boolean ende = false;
-        char[][] spielfeld = new char[8][8];
-        int currentX = 0;
-        boolean actPlayer = false;
-        int winningStoneCount = 4;
 
         //Objekte Initalisieren
-        Spielfeld spielfeld1 = new Spielfeld();
+        Spielfeld spielfeld = new Spielfeld(new char[8][8],4);
         UI userinterface = new UI();
         Player[] Players = new Player[]{new Player("Markus",'X'),new Player("David",'O')};
 
@@ -27,9 +23,9 @@ public class Main {
         while (!ende) {
 
             for (Player player: Players) {
-                spielfeld1.setStone(userinterface.getRow(player,spielfeld1),player);
-                spielfeld1.printspielfeld();
-                ende = spielfeld1.isOver(winningStoneCount,player);
+                while(!spielfeld.setStone(userinterface.getcolumn(player,spielfeld),player));
+                spielfeld.printspielfeld();
+                ende = spielfeld.isOver(player);
             }
 
 //            int zaehler = 0;

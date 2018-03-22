@@ -9,41 +9,39 @@ public class UI {
         System.out.println("Die Spalten und Reihen angabe wird wie folgt angegeben Spalte:Reihe zum Beispiel 1:1 für den ersten Stein oben links \n");
     }
 
-    public int getRow(Player player, Spielfeld spielfeld){
+    public int getcolumn(Player player, Spielfeld spielfeld){
 
         int zaehler = 0;
         boolean correctvalues = false;
-        int currentX = 0;
+        int currentX = -1;
 
         try {
 
             while (!correctvalues) {
-                System.out.print("Spieler"+ player.getName() + "mit Stein" + player.getStone() + " bitte geben Sie die Spalte an: ");
-                for (char c; (c = (char) System.in.read()) != '\r' && c != '\n' && currentX != 0; zaehler++) {
+                System.out.print("Spieler "+ player.getName() + " mit Stein " + player.getStone() + " ,bitte geben Sie die Spalte an: ");
+                for (char c; (c = (char) System.in.read()) != '\r' && c != '\n'; zaehler++) {
 
-                    if (zaehler == 0 && c >= '1' && c <= '8') {
+                    if (c >= '1' && c <= '8') {
 
                         currentX = c - 48;
+                        correctvalues = true;
 
-                        if (!spielfeld.setStone(currentX,player)){
-                            break;
-                        }
-
-                        continue;
+//                        if (!spielfeld.setStone(currentX,player)){
+//                            break;
+//                        }
 
                     } else {
-                        System.out.println("Fehler bei der Eingabe");
+                        System.out.println("Fehler bei der Eingabe, Rei");
                     }
 
                 }
-                correctvalues = true;
             }
 
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        return currentX;
+        return currentX -1;
     }
 
 }

@@ -3,6 +3,13 @@ package com.company;
 public class Spielfeld {
 
     private char[][] spielfeld = new char[8][8];
+    private int winningStoneCount = 4;
+
+
+    public Spielfeld(char[][] spielfeld,int winningStoneCount){
+        this.spielfeld = spielfeld;
+        this.winningStoneCount = winningStoneCount;
+    }
 
     public void printspielfeld(){
 
@@ -30,13 +37,13 @@ public class Spielfeld {
     public boolean setStone(int row, Player player){
 
         for (int colum = spielfeld.length -1; colum >= 0; colum--){
-            if (spielfeld[colum][row -1] == 0){
+            if (spielfeld[colum][row] == 0){
 
-                    spielfeld[colum][row-1] = player.getStone();
+                    spielfeld[colum][row] = player.getStone();
 
                 break;
             } else if (colum == 0){
-                System.out.println("Hier kann der Stein nicht eingelegt werder!");
+                System.out.println("\nHier kann der Stein nicht eingelegt werden!\n");
                 return false;
             }
         }
@@ -45,7 +52,7 @@ public class Spielfeld {
         return true;
     }
 
-    public boolean isOver(int winningStoneCount, Player player) {
+    public boolean isOver(Player player) {
 
         //Schräg von Links nach rechts
         for (int colum = winningStoneCount; colum <= spielfeld[0].length; colum++) {
