@@ -5,8 +5,8 @@ import java.io.IOException;
 public class UI {
 
     public void welcomePlayer(){
-        System.out.println("Herzlich willkomen zu Vier gewinnt \nSpieler ein besitzt den Stein X und Spieler 2 den Stein O (wie Otto)");
-        System.out.println("Die Spalten und Reihen angabe wird wie folgt angegeben Spalte:Reihe zum Beispiel 1:1 für den ersten Stein oben links \n");
+        System.out.println("Herzlich willkomen zu Vier gewinnt! \n");
+//        System.out.println("Die Spalten und Reihen angabe wird wie folgt angegeben Spalte:Reihe zum Beispiel 1:1 für den ersten Stein oben links \n");
     }
 
     public int getcolumn(Player player, Spielfeld spielfeld){
