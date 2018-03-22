@@ -55,72 +55,57 @@ public class Spielfeld {
     public boolean isOver(Player player) {
 
         //Schräg von Links nach rechts
-        for (int colum = winningStoneCount; colum <= spielfeld[0].length; colum++) {
 
-            for (int currentrow = 0; currentrow <= spielfeld.length; currentrow++) {
+        for (int currentrow = winningStoneCount; currentrow <= spielfeld.length - 1; currentrow++) {
+
+            for (int colum = 0; colum <= spielfeld[0].length; colum++) {
+
+//                if (colum == 7){
+//                    int test = 0;
+//                }
 
                 int blockcount = 0;
 //                int blockcountO = 0;
 
-                for (int aktcolum = colum, aktrow = currentrow; aktcolum <= spielfeld[0].length -1 && aktrow <= spielfeld.length -1; aktcolum++, aktrow++) {
-//                    if (aktcolum == 8 || aktrow == 8){
-//                        int testz = 0;
-//                    }
+                for (int aktcolum = colum, aktrow = currentrow; aktcolum <= spielfeld[0].length - 1 && aktrow >= 0; aktcolum++, aktrow--) {
+                    if (aktcolum == 8 || aktrow == 8) {
+                        int testz = 0;
+                    }
                     if (spielfeld[aktrow][aktcolum] == player.getStone()) {
                         blockcount++;
                     } else {
                         blockcount = 0;
                     }
 
-//                    if (spielfeld[aktrow][aktcolum] == 'O') {
-//                        blockcountO++;
-//                    } else {
-//                        blockcountO = 0;
-//                    }
-
-                    if (blockcount == 4) {
+                    if (blockcount == winningStoneCount) {
                         return true;
                     }
 
-//                    if (blockcountO == 4 || blockcountX == 4) {
-//                        return true;
-//                    }
                 }
             }
         }
 
         //Schräg von rechts nach links
-        for (int colum = winningStoneCount; colum <= spielfeld[0].length -1; colum++) {
 
-            for (int currentrow = spielfeld[0].length -1; currentrow>= 0; currentrow--) {
+        for (int currentrow = winningStoneCount; currentrow <= spielfeld.length - 1; currentrow++) {
+
+            for (int colum = spielfeld[0].length - 1; colum >= 0; colum--) {
 
                 int blockcount = 0;
-//                int blockcountO = 0;
 
                 for (int aktcolum = colum, aktrow = currentrow; aktcolum >= 0 && aktrow >= 0; aktcolum--, aktrow--) {
-//                    if (aktcolum == 8 || aktrow == 8){
-//                        int testz = 0;
-//                    }
+
                     if (spielfeld[aktrow][aktcolum] == player.getStone()) {
                         blockcount++;
                     } else {
                         blockcount = 0;
                     }
 
-//                    if (spielfeld[aktrow][aktcolum] == 'O') {
-//                        blockcountO++;
-//                    } else {
-//                        blockcountO = 0;
-//                    }
 
-                    if (blockcount == 4) {
+                    if (blockcount == winningStoneCount) {
                         return true;
                     }
 
-
-//                    if (blockcountO == 4 || blockcountX == 4) {
-//                        return true;
-//                    }
                 }
             }
         }
@@ -129,7 +114,6 @@ public class Spielfeld {
         for (int colum = 0; colum <= spielfeld[0].length -1; colum++) {
 
             int blockcount = 0;
-//            int blockcountO = 0;
 
             for (int aktrow = 0; aktrow <= spielfeld[0].length -1; aktrow++) {
 
@@ -139,19 +123,9 @@ public class Spielfeld {
                     blockcount = 0;
                 }
 
-//                if (spielfeld[aktrow][colum] == 'O') {
-//                    blockcountO++;
-//                } else {
-//                    blockcountO = 0;
-//                }
-
-                if (blockcount == 4) {
+                if (blockcount == winningStoneCount) {
                     return true;
                 }
-
-//                if (blockcountO == 4 || blockcountX == 4) {
-//                    return true;
-//                }
 
             }
         }
@@ -162,30 +136,18 @@ public class Spielfeld {
 
             int blockcount = 0;
 
-//            if (aktrow == 7){
-//                int i = 1;
-//            }
-
             for (int colum = 0; colum <= spielfeld[0].length -1; colum++) {
 
-
-                if (spielfeld[aktrow][colum] == 'X') {
+                if (aktrow == 7) {
+                    int test = 0;
+                }
+                if (spielfeld[aktrow][colum] == player.getStone()) {
                     blockcount++;
                 } else {
                     blockcount = 0;
                 }
 
-//                if (spielfeld[aktrow][colum] == 'O') {
-//                    blockcountO++;
-//                } else {
-//                    blockcountO = 0;
-//                }
-
-//                if (blockcountO == 4 || blockcountX == 4) {
-//                    return true;
-//                }
-
-                if (blockcount == 4) {
+                if (blockcount == winningStoneCount) {
                     return true;
                 }
 

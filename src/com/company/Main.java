@@ -26,6 +26,9 @@ public class Main {
                 while(!spielfeld.setStone(userinterface.getcolumn(player,spielfeld),player));
                 spielfeld.printspielfeld();
                 ende = spielfeld.isOver(player);
+                if (ende) {
+                    break;
+                }
             }
 
 //            int zaehler = 0;
