@@ -31,7 +31,7 @@ public class UI {
 //                        }
 
                     } else {
-                        System.out.println("Fehler bei der Eingabe, Rei");
+                        System.out.println("Fehler bei der Eingabe, mit Zeichen " + (char) currentX + ", dieses ist leider nicht gültig");
                     }
 
                 }
